@@ -1,0 +1,56 @@
+[
+  {
+    "name": "SA_CritInfra",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/CritInfra/"
+    },
+    "cache": "NONE"
+  },
+  {
+    "name": "SA_Drainage",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/Drainage/"
+    },
+    "cache": "NONE"
+  },
+  {
+    "name": "SA_Floodprone",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/Floodprone/"
+    },
+    "cache": "NONE"
+  },
+  {
+    "name": "SA_SeaLevelRise",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SeaLevelRise/"
+    },
+    "cache": "NONE"
+  },
+  {
+    "name": "SA_Slope",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/Slope/"
+    },
+    "cache": "NONE"
+  },
+  {
+    "name": "SA_ExposureIndex",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/ExposureIndex/"
+    },
+    "cache": "NONE"
+  }
+]

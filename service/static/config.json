@@ -2,38 +2,29 @@
     "title" : "Chattanooga Agriculture & Forestry Value Model",
     "weightedOverlay": {
         "numBreaks" : "10",
-        "opacity"   : "0.75",
+        "opacity"   : "1",
         "ramp"      : "yellow-to-red-heatmap",
-        "layers" : [ { "name" : "ImperviousSurfacesBarrenLandsOpenWater", 
-                       "weight" : "-5",
-                       "display" : "High Intensity Development, Impervious Surfaces, or Open Water" },
-                     { "name": "DevelopedLand",
-                       "weight": "-4",  
-                       "display": "Developed Land"},
-                     { "name": "Wetlands",
-                       "weight": "-2",  
-                       "display": "Wetlands"},
-                     { "name": "ForestedLands",
-                       "weight": "1",  
-                       "display": "Forested Lands"},
-                     { "name": "NonWorkingProtectedOrPublicLands",
-                       "weight": "-1",  
-                       "display": "Non-working Protected or Public Lands"},
-                     { "name": "PrimeAgriculturalSoilsNotForestedOrFarmland",
-                       "weight": "0",  
-                       "display": "Prime Agricultural Soils, Not Forested or Farmland"},
-                     { "name": "PublicallyOwnedWorkingLands",
-                       "weight": "2",  
-                       "display": "Publically Owned Working Lands"},
-                     { "name": "PrivatelyOwnedWorkingLandsWithEasements", 
-                       "weight": "4",  
-                       "display": "Privately Owned Working Lands, with Easements"},
-                     { "name": "FarmlandWithoutPrimeAgriculturalSoils",  
-                       "weight": "3",  
-                       "display": "Farmland, without prime Agricultural Soils"},
-                     { "name": "FarmlandOrForestedLandsWithPrimeAgriculturalSoils",
-                       "weight": "5",  
-                       "display": "Farmland or Forested Lands, with prime Agricultural Soils"}
-                   ]
+        "layers" : [
+          {
+            "name" : "SA_Slope_Charleston", 
+            "weight" : "1",
+            "display" : "Slope Index"
+          },
+          {
+            "name" : "SA_Drainage_Charleston", 
+            "weight" : "1",
+            "display" : "Drainage Index"
+          },
+          {
+            "name" : "SA_Floodprone_Charleston", 
+            "weight" : "1",
+            "display" : "Floodprone Area Index"
+          },
+          {
+            "name" : "SA_SeaLevelRise_Charleston", 
+            "weight" : "1",
+            "display" : "Sea Level Rise Index"
+          }
+        ]
     }
 }

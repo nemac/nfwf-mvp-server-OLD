@@ -6,7 +6,7 @@
       "zookeepers": "zookeeper",
       "instance": "accumulo",
       "user": "root",
-      "password": "GisPwd"
+      "password": "secret"
     },
     {
       "name": "cassandra-local",

@@ -118,6 +118,7 @@ trait ChattaServiceRouter extends Directives with AkkaSystem.LoggerExecutor with
 
       complete {
         Future {
+          /*
           val maskTile =
             timedCreate(
               "tms",
@@ -125,7 +126,7 @@ trait ChattaServiceRouter extends Directives with AkkaSystem.LoggerExecutor with
               "ChattaServiceRouter(124)::maskTile end") {
               tileReader.reader[SpatialKey, Tile](LayerId("mask", zoom)).read(key).convert(ShortConstantNoDataCellType).mutable
             }
-
+          */
           val (extSeq, tileSeq) =
             timedCreate(
               "tms",
@@ -166,7 +167,7 @@ trait ChattaServiceRouter extends Directives with AkkaSystem.LoggerExecutor with
             "tms",
             "ChattaServiceRouter(167)::tile start",
             "ChattaServiceRouter(167)::tile end") {
-            tileMap.localMask(maskTile, NODATA, NODATA)
+            tileMap //.localMask(maskTile, NODATA, NODATA)
           }
 
           val maskedTile =

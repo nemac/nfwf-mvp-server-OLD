@@ -17,6 +17,7 @@ services:
       - "./service/static:/static"
       - "./service/geotrellis/data:/data/"
   gt-chatta-ingest:
+    shm_size: 10g
     build:
       context: ./service
       dockerfile: Dockerfile.ingest

@@ -30,7 +30,7 @@ services:
       environment:
         HADOOP_MASTER_ADDRESS: hdfs-name
         ZOOKEEPERS: zookeeper
-        ACCUMULO_PASSWORD: GisPwd
+        ACCUMULO_PASSWORD: secret
       depends_on:
         - zookeeper
         - accumulo-monitor
