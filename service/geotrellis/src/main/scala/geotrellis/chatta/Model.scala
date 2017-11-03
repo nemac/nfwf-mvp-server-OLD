@@ -6,13 +6,18 @@ import geotrellis.spark.io._
 import geotrellis.vector._
 
 object CollectionLayerRatio {
-  def rasterResult(r: TileLayerCollection[SpatialKey]): LayerRatio = {
+  def rasterResult(r: TileLayerCollection[SpatialKey], poly: Polygon): LayerRatio = {
     val mapTransform = r.metadata.mapTransform
     val (sum, count) =
       r map { case (k, tile) =>
         val extent = mapTransform(k)
-        (tile.polygonalSum(extent, extent.toPolygon()), tile.size)
-      } reduce[(Long, Int)] { case (t1, t2) => (t1._1 + t2._1, t1._2 + t2._2) }
+        val polyRegionTileSum : Long = tile.polygonalSum(extent, poly)
+        val polyRegionPixelCount : Long = {
+          val pixelCountTile = tile.map { _ => 1 }
+          pixelCountTile.polygonalSum(extent, poly)
+        }
+        (polyRegionTileSum, polyRegionPixelCount)
+      } reduce[(Long, Long)] { case (t1, t2) => (t1._1 + t2._1, t1._2 + t2._2) }
 
     LayerRatio(sum, count)
   }
@@ -46,9 +51,8 @@ object Model {
       layerIds.zip(weights)
         .map { case (layer, weight) =>
           val raster = reader.read[SpatialKey, Tile, TileLayerMetadata[SpatialKey]](layer)
-          val masked = raster.mask(polygon)
-          val ratio = CollectionLayerRatio.rasterResult(masked)
-
+          //val masked = raster.mask(polygon)
+          val ratio = CollectionLayerRatio.rasterResult(raster, polygon)
           LayerSummary(layer.name, ratio.value * weight)
         }
 

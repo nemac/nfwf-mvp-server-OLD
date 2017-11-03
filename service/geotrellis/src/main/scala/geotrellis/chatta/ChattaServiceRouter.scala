@@ -228,14 +228,14 @@ trait ChattaServiceRouter extends Directives with AkkaSystem.LoggerExecutor with
           val layerSummaries = summary.layerSummaries.map { ls =>
             JsObject(
               "layer" -> ls.name.toJson,
-              "total" -> "%.2f".format(ls.score * 100).toJson
+              "total" -> "%.2f".format(ls.score).toJson
             )
           }
 
           printBuffer("sum")
           JsObject(
             "layerSummaries" -> layerSummaries.toJson,
-            "total" -> "%.2f".format(summary.score * 100).toJson,
+            "total" -> "%.2f".format(summary.score).toJson,
             "elapsed" -> elapsedTotal.toJson
           )
         }
