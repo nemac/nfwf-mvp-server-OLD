@@ -6,6 +6,26 @@
         "ramp"      : "yellow-to-red-heatmap",
         "layers" : [
           {
+            "name": "SA_AquaticIndex_Charleston",
+            "weight": "1",
+            "display": "Aquatic Index"
+          },
+          {
+            "name": "SA_TerrestrialIndex_Charleston",
+            "weight": "1",
+            "display": "Terrestrial Index"
+          },
+          {
+            "name": "SA_ErosionShift_Charleston",
+            "weight": "1",
+            "display": "Erosion Index"
+          },
+          {
+            "name": "SA_SoVIShift_Charleston",
+            "weight": "1",
+            "display": "Social Vulnerability Index"
+          },
+          {
             "name" : "SA_Slope_Charleston", 
             "weight" : "1",
             "display" : "Slope Index"

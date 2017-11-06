@@ -1,56 +1,52 @@
 [
   {
-    "name": "SA_CritInfra",
+    "name": "SA_AquaticIndex_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/CritInfra/"
+      "path": "file:///data/arg_wm/SA_AquaticIndex_Charleston/"
     },
-    "cache": "NONE"
+    "cache": "NONE",
+    "noData": 255
   },
   {
-    "name": "SA_Drainage",
+    "name": "SA_TerrestrialIndex_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/Drainage/"
+      "path": "file:///data/arg_wm/SA_TerrestrialIndex_Charleston/"
     },
-    "cache": "NONE"
+    "cache": "NONE",
+    "noData": 15
   },
   {
-    "name": "SA_Floodprone",
+    "name": "SA_SoVIShift_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/Floodprone/"
+      "path": "file:///data/arg_wm/SA_SoVIShift_Charleston/"
     },
-    "cache": "NONE"
+    "cache": "NONE",
+    "noData": 255
   },
   {
-    "name": "SA_SeaLevelRise",
+    "name": "SA_ErosionShift_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/SeaLevelRise/"
+      "path": "file:///data/arg_wm/SA_ErosionShift_Charleston/"
     },
-    "cache": "NONE"
+    "cache": "NONE",
+    "noData": 15
   },
   {
-    "name": "SA_Slope",
+    "name": "SA_SLOSH_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/Slope/"
+      "path": "file:///data/arg_wm/SA_SLOSH_Charleston/"
     },
-    "cache": "NONE"
-  },
-  {
-    "name": "SA_ExposureIndex",
-    "format": "geotiff",
-    "backend": {
-      "type": "hadoop",
-      "path": "file:///data/arg_wm/ExposureIndex/"
-    },
-    "cache": "NONE"
+    "cache": "NONE",
+    "noData": 255
   }
 ]

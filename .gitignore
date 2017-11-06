@@ -13,7 +13,7 @@ TAGS
 *.sublime-workspace
 .DS_Store
 
-service/geotrellis/data/chatta-demo/
+service/geotrellis/data/arg_wm/
 
 # Vagrant
 .vagrant

@@ -1,39 +1,12 @@
 [
   {
-    "name": "SA_Slope_Charleston",
+    "name": "SA_ExposureIndex_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_Slope_Charleston/"
+      "path": "file:///data/arg_wm/SA_ExposureIndex_Charleston/"
     },
     "cache": "NONE",
-    "noData": 128
-  },
-  {
-    "name": "SA_Floodprone_Charleston",
-    "format": "geotiff",
-    "backend": {
-      "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_Floodprone_Charleston/"
-    },
-    "cache": "NONE"
-  },
-  {
-    "name": "SA_SeaLevelRise_Charleston",
-    "format": "geotiff",
-    "backend": {
-      "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_SeaLevelRise_Charleston/"
-    },
-    "cache": "NONE"
-  },
-  {
-    "name": "SA_Drainage_Charleston",
-    "format": "geotiff",
-    "backend": {
-      "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_Drainage_Charleston/"
-    },
-    "cache": "NONE"
+    "noData": 15
   }
 ]
