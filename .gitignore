@@ -13,6 +13,8 @@ TAGS
 *.sublime-workspace
 .DS_Store
 
+service/geotrellis/data/chatta-demo/
+
 # Vagrant
 .vagrant
 deployment/ansible/roles/azavea.*
