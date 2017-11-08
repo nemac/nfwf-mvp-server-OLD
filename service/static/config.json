@@ -1,50 +1,80 @@
 {
-    "title" : "Chattanooga Agriculture & Forestry Value Model",
-    "weightedOverlay": {
-        "numBreaks" : "10",
-        "opacity"   : "1",
-        "ramp"      : "yellow-to-red-heatmap",
-        "layers" : [
-          {
-            "name": "SA_AquaticIndex_Charleston",
-            "weight": "1",
-            "display": "Aquatic Index"
-          },
-          {
-            "name": "SA_TerrestrialIndex_Charleston",
-            "weight": "1",
-            "display": "Terrestrial Index"
-          },
-          {
-            "name": "SA_ErosionShift_Charleston",
-            "weight": "1",
-            "display": "Erosion Index"
-          },
-          {
-            "name": "SA_SoVIShift_Charleston",
-            "weight": "1",
-            "display": "Social Vulnerability Index"
-          },
-          {
-            "name" : "SA_Slope_Charleston", 
-            "weight" : "1",
-            "display" : "Slope Index"
-          },
-          {
-            "name" : "SA_Drainage_Charleston", 
-            "weight" : "1",
-            "display" : "Drainage Index"
-          },
-          {
-            "name" : "SA_Floodprone_Charleston", 
-            "weight" : "1",
-            "display" : "Floodprone Area Index"
-          },
-          {
-            "name" : "SA_SeaLevelRise_Charleston", 
-            "weight" : "1",
-            "display" : "Sea Level Rise Index"
-          }
-        ]
-    }
+  "title" : "Conservation Project Site Selection Tool",
+  "weightedOverlay": {
+    "numBreaks" : "10",
+    "opacity"   : "1",
+    "ramp"      : "yellow-to-red-heatmap",
+    "groups"    : [
+      {
+        "id": "threatIndex",
+        "title": "Threat Index"
+      },
+      {
+        "id": "assetIndex",
+        "title": "Community Asset Index"
+      }
+    ],
+    "layers" : [
+      {
+        "name": "SA_SoVIShift_Charleston",
+        "weight": "1",
+        "display": "Social Vulnerability",
+        "group": "assetIndex"
+      },
+      {
+        "name": "SA_CritInfra_Charleston",
+        "weight": "1",
+        "display": "Critical Infrastructure",
+        "group": "assetIndex"
+      },
+      {
+        "name": "SA_CritFac_Charleston",
+        "weight": "1",
+        "display": "Critical Facilities",
+        "group": "assetIndex"
+      },
+      {
+        "name": "SA_ErosionShift_Charleston",
+        "weight": "1",
+        "display": "Soil Erosion",
+        "group": "threatIndex"
+      },
+      {
+        "name" : "SA_Slope_Charleston", 
+        "weight" : "1",
+        "display" : "Areas of Low Slope",
+        "group": "threatIndex"
+      },
+      {
+        "name" : "SA_Drainage_Charleston", 
+        "weight" : "1",
+        "display" : "Soil Drainage",
+        "group": "threatIndex"
+      },
+      {
+        "name" : "SA_Floodprone_Charleston", 
+        "weight" : "1",
+        "display" : "Floodprone Areas",
+        "group": "threatIndex"
+      },
+      {
+        "name" : "SA_SeaLevelRise_Charleston", 
+        "weight" : "1",
+        "display" : "Sea Level Rise",
+        "group": "threatIndex"
+      },
+      {
+        "name": "SA_BeachDune_Charleston",
+        "weight": "1",
+        "display": "Beaches and Dunes",
+        "group": "threatIndex"
+      },
+      {
+        "name" : "SA_SLOSH_Charleston", 
+        "weight" : "1",
+        "display" : "Storm Surge",
+        "group": "threatIndex"
+      }
+    ]
+  }
 }

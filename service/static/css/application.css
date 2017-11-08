@@ -60,11 +60,21 @@ body {
    Sidebar
 ======================================================= */
 
-h4.slider-label {
-	padding: 0 2px 0 0;
-	margin: 0 25px 15px -5px;
-	font-size: 12px;
-	font-weight: normal;
+.param-control {
+	margin-bottom: 10px;
+}
+
+.param-title {
+	margin: 0px 0px 0px 5px;
+	font-size: 14px;
+	font-weight: bold;
+	display: inline-block;
+}
+
+input.param-layer-checkbox {
+	width: 18px;
+	height: 18px;
+	margin-bottom: 4px;
 }
 
 span.weight {
@@ -107,12 +117,12 @@ span.weight input {
 }
 
 #leftCol {
-	width: 665px;
+	width: 900px;
 	float: left;
 }
 
 .container-main {
-	width: 1024px;
+	width: 1240px;
 	margin: 0 auto;
 }
 

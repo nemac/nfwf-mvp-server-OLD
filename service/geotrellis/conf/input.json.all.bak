@@ -20,21 +20,21 @@
     "noData": 15
   },
   {
-    "name": "SA_SoVIShift_Charleston",
+    "name": "SA_SoVI_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_SoVIShift_Charleston/"
+      "path": "file:///data/arg_wm/SA_SoVI_Charleston/"
     },
     "cache": "NONE",
     "noData": 255
   },
   {
-    "name": "SA_ErosionShift_Charleston",
+    "name": "SA_Erosion_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_ErosionShift_Charleston/"
+      "path": "file:///data/arg_wm/SA_Erosion_Charleston/"
     },
     "cache": "NONE",
     "noData": 15
@@ -48,5 +48,33 @@
     },
     "cache": "NONE",
     "noData": 255
-  }
+  },
+  {
+    "name": "SA_ExposureIndex_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_ExposureIndex_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 15
+  },
+  {
+    "name": "SA_CritInfra_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_CritInfra_Charleston/"
+    },
+    "cache": "NONE"
+  },
+  {
+    "name": "SA_CritFac_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_CritFac_Charleston/"
+    },
+    "cache": "NONE"
+  },
 ]
