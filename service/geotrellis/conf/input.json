@@ -1,12 +1,123 @@
 [
   {
+    "name": "SA_CritFac_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_CritFac_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 15
+  },
+  {
+    "name": "SA_Erosion_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_Erosion_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 15
+  },
+  {
+    "name": "SA_Floodprone_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_Floodprone_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 15
+  },
+  {
+    "name": "SA_Drainage_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_Drainage_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 15
+  },
+  {
+    "name": "SA_ExposureIndex_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_ExposureIndex_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 15
+  },
+  {
+    "name": "SA_Slope_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_Slope_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 128
+  },
+  {
+    "name": "SA_BeachDune_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_BeachDune_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 255
+  },
+  {
+    "name": "SA_CritInfra_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_CritInfra_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 255
+  },
+  {
     "name": "SA_CenDens_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
       "path": "file:///data/arg_wm/SA_CenDens_Charleston/"
     },
-    "cache": "NONE"
-  }
+    "cache": "NONE",
+    "noData": 255
+  },
+  {
+    "name": "SA_SLOSH_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_SLOSH_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 255
+  },
+  {
+    "name": "SA_SoVI_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_SoVI_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 255
+  },
+  {
+    "name": "SA_SeaLevelRise_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_SeaLevelRise_Charleston/"
+    },
+    "cache": "NONE",
+    "noData": 255
+  },
 
 ]
