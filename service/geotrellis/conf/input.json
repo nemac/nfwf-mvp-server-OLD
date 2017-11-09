@@ -14,7 +14,7 @@
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_Erosion_Charleston/"
+      "path": "file:///data/arg_wm/SA_ErosionShift_Charleston/"
     },
     "cache": "NONE",
     "noData": 15
@@ -100,7 +100,7 @@
     "noData": 255
   },
   {
-    "name": "SA_SoVI_Charleston",
+    "name": "SA_SoVIShift_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",

@@ -286,8 +286,9 @@ var summary = (function() {
 		model.trigger("change")
 
 		if (groups[0].total && groups[1].total) {
-			model.set("exposureScore", Number(groups[0].total) * Number(groups[1].total))
-			$("#exposure-score").append(""+model.get("exposureScore"))
+			model.set("exposureScore", (Number(groups[0].total) * Number(groups[1].total)).toFixed(2))
+			var eScore = $("#exposure-score")
+			eScore.html(""+model.get("exposureScore"))
 		}
 
 		if(switchTab) { $('a[href=#summary]').tab('show'); };
@@ -421,7 +422,9 @@ var drawing = (function() {
 
 	map.on('draw:drawstart', function(e) {
 		var polygon = summary.getPolygon();
-		if(polygon != null) { drawnItems.removeLayer(polygon); }
+		if(polygon != null) {
+			drawnItems.removeLayer(polygon);
+		}
 	});
 
 	map.on('draw:drawstop', function(e) {

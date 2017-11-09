@@ -22,7 +22,7 @@
         "group": "assetLayers"
       },
       {
-        "name": "SA_SoVI_Charleston",
+        "name": "SA_SoVIShift_Charleston",
         "weight": "1",
         "display": "Social Vulnerability",
         "group": "assetLayers"
@@ -40,7 +40,7 @@
         "group": "assetLayers"
       },
       {
-        "name": "SA_Erosion_Charleston",
+        "name": "SA_ErosionShift_Charleston",
         "weight": "1",
         "display": "Soil Erosion",
         "group": "threatLayers"
