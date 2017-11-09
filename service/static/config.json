@@ -40,7 +40,7 @@
         "group": "assetLayers"
       },
       {
-        "name": "SA_ErosionShift_Charleston",
+        "name": "SA_Erosion_Charleston",
         "weight": "1",
         "display": "Soil Erosion",
         "group": "threatLayers"
