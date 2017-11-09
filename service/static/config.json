@@ -6,74 +6,80 @@
     "ramp"      : "yellow-to-red-heatmap",
     "groups"    : [
       {
-        "id": "threatIndex",
-        "title": "Threat Index"
+        "id": "threatLayers",
+        "title": "Threat Layers"
       },
       {
-        "id": "assetIndex",
-        "title": "Community Asset Index"
+        "id": "assetLayers",
+        "title": "Asset Layers"
       }
     ],
     "layers" : [
       {
+        "name": "SA_CenDens_Charleston",
+        "weight": "1",
+        "display": "Population Density",
+        "group": "assetLayers"
+      },
+      {
         "name": "SA_SoVIShift_Charleston",
         "weight": "1",
         "display": "Social Vulnerability",
-        "group": "assetIndex"
+        "group": "assetLayers"
       },
       {
         "name": "SA_CritInfra_Charleston",
         "weight": "1",
         "display": "Critical Infrastructure",
-        "group": "assetIndex"
+        "group": "assetLayers"
       },
       {
         "name": "SA_CritFac_Charleston",
         "weight": "1",
         "display": "Critical Facilities",
-        "group": "assetIndex"
+        "group": "assetLayers"
       },
       {
         "name": "SA_ErosionShift_Charleston",
         "weight": "1",
         "display": "Soil Erosion",
-        "group": "threatIndex"
+        "group": "threatLayers"
       },
       {
         "name" : "SA_Slope_Charleston", 
         "weight" : "1",
         "display" : "Areas of Low Slope",
-        "group": "threatIndex"
+        "group": "threatLayers"
       },
       {
         "name" : "SA_Drainage_Charleston", 
         "weight" : "1",
         "display" : "Soil Drainage",
-        "group": "threatIndex"
+        "group": "threatLayers"
       },
       {
         "name" : "SA_Floodprone_Charleston", 
         "weight" : "1",
         "display" : "Floodprone Areas",
-        "group": "threatIndex"
+        "group": "threatLayers"
       },
       {
         "name" : "SA_SeaLevelRise_Charleston", 
         "weight" : "1",
         "display" : "Sea Level Rise",
-        "group": "threatIndex"
+        "group": "threatLayers"
       },
       {
         "name": "SA_BeachDune_Charleston",
         "weight": "1",
         "display": "Beaches and Dunes",
-        "group": "threatIndex"
+        "group": "threatLayers"
       },
       {
         "name" : "SA_SLOSH_Charleston", 
         "weight" : "1",
         "display" : "Storm Surge",
-        "group": "threatIndex"
+        "group": "threatLayers"
       }
     ]
   }

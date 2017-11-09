@@ -53,90 +53,102 @@
 
 	<div id="main">
 	
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-		<div class="container-main">
-			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
-			<a class="brand" href="#">Conservation Project Site Selection Tool</a>
-		</div>
-		</div>
-	</div>
-
-	<div class="container-main">
-		<div class="row">
-
-			<div id="leftCol">
-
-				<div id="map">
-					<a class="btn btn-inverse" id="clearButton" href="#">Clear Polygon</a>
-				</div>
-		
-			<div id="wrap">
-				<div class="well pull-left">
-					<table>
-						<tbody class="legend">
-							<tr>
-								<td><img id="activeRamp" style="text-align: middle;"></img></td>
-							</tr>
-							<tr>
-								<td>
-									<small>Low</small>
-								</td>
-								<td style="position: absolute; margin-left: -28px;">
-									<small>High</small>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="options">
-					<ul id="colorChooser" class="nav">
-						<li class="dropdown">
-							<a class="btn dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">
-								Color Ramps <i class="icon-chevron-up"></i>
-							</a>
-							<ul id="color-ramp-menu" class="dropdown-menu" role="menu" aria-labelledby="drop5"></ul>
-						</li>
-					</ul> <!-- /tabs -->
-					<div id="opacitySlider">
-						<span class="slider-label">Opacity</span>
-						<div id="opacity-slider"></div>
-					</div>
-				 </div>
-			 </div> <!-- end wrap -->
-		
-		</div><!--/map-->
-
-		<div id="sidebar">
-		
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#parameters" data-toggle="tab">Parameters</a></li>
-			<li><a href="#summary" data-toggle="tab">Summary</a></li>
-		</ul>
-		
-		
-		<div class="tab-content" id="tabBody">
-		
-		<div class="tab-pane active" id="parameters">
-		
-		</div>
-			
-			<div class="tab-pane" id="summary">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+			<div class="container-main">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">Conservation Project Site Selection Tool</a>
 			</div>
-			
-			</div> <!--/tab-content -->
-			
-		</div><!--/span-->
-			
-		</div><!--/row-->
+			</div>
+		</div>
 
-	</div><!--/.fluid-container-->
-	
-	</div>
+		<div class="container-main">
+			<div class="row">
+
+				<div id="leftCol">
+
+					<div id="map">
+						<a class="btn btn-inverse" id="clearButton" href="#">Clear Polygon</a>
+					</div>
+			
+					<div id="wrap">
+						<div class="well pull-left">
+							<table>
+								<tbody class="legend">
+									<tr>
+										<td><img id="activeRamp" style="text-align: middle;"></img></td>
+									</tr>
+									<tr>
+										<td>
+											<small>Low</small>
+										</td>
+										<td style="position: absolute; margin-left: -28px;">
+											<small>High</small>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="options">
+							<ul id="colorChooser" class="nav">
+								<li class="dropdown">
+									<a class="btn dropdown-toggle" id="drop5" role="button" data-toggle="dropdown" href="#">
+										Color Ramps <i class="icon-chevron-up"></i>
+									</a>
+									<ul id="color-ramp-menu" class="dropdown-menu" role="menu" aria-labelledby="drop5"></ul>
+								</li>
+							</ul> <!-- /tabs -->
+							<div id="opacitySlider">
+								<span class="slider-label">Opacity</span>
+								<div id="opacity-slider"></div>
+							</div>
+						 </div>
+					 </div> <!-- end wrap -->
+			
+				</div><!--/leftCol-->
+
+				<div id="sidebar">
+				
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#parameters" data-toggle="tab">Parameters</a></li>
+						<li><a href="#summary" data-toggle="tab">Summary</a></li>
+					</ul>
+				
+				
+					<div class="tab-content" id="tabBody">
+					
+						<div class="tab-pane active" id="parameters">
+						
+						</div>
+							
+						<div class="tab-pane" id="summary">
+
+							<div id="exposure-score">
+								<h4>Exposure Score: </h4>
+							</div>
+
+						</div>
+					
+					</div> <!--/tab-content -->
+					
+				</div><!--/span-->
+
+			</div> <!-- /row -->
+
+		</div> <!-- /container-main -->
+
+	</div> <!-- /main -->
+
+
+
+
+
+
+
 
 
 	<!-- Templates -->
@@ -213,7 +225,6 @@
 			})
 		%>
 	</script>
-
 
 	<div id="parameterInterface" style="display:none">
 		<div class="well">

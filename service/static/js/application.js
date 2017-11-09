@@ -42,10 +42,6 @@ var map = (function() {
 })()
 
 
-
-
-
-
 var Model = function (config) {
 	var m = new Backbone.Model()
 	m.set("groups", config.groups)
@@ -129,12 +125,12 @@ var weightedOverlay = (function() {
 				WOLayer.addTo(map);
 				map.lc.addOverlay(WOLayer, "Weighted Overlay");
 			}
-		});
-	};
+		})
+	}
 
 	var initView = function (model) {
 
-		var V = Backbone.View.extend({
+		var View = Backbone.View.extend({
 
 			model: model,
 
@@ -178,7 +174,7 @@ var weightedOverlay = (function() {
 
 		})
 
-		return new V()
+		return new View()
 
 	}
 
@@ -269,8 +265,12 @@ var summary = (function() {
 
 	var updateSummaryGroupInterface = function(data, groupId, switchTab) {
 
-		var group = model.get("groups").filter(group => group.id === groupId)[0]
-		group.total = data.total
+		var groups = model.get("groups")
+		_.each(groups, function (group) {
+			if (group.id === groupId) {
+				group.total = data.total
+			}
+		})
 
 		var layers = model.get("layers")
 		_.map(data.layerSummaries, function(ls) {
@@ -282,14 +282,20 @@ var summary = (function() {
 		})
 
 		model.set("layers", layers)
+		model.set("groups", groups)
 		model.trigger("change")
+
+		if (groups[0].total && groups[1].total) {
+			model.set("exposureScore", Number(groups[0].total) * Number(groups[1].total))
+			$("#exposure-score").append(""+model.get("exposureScore"))
+		}
 
 		if(switchTab) { $('a[href=#summary]').tab('show'); };
 	}
 
 	var initView = function (model) {
 
-		var V = Backbone.View.extend({
+		var View = Backbone.View.extend({
 
 			model: model,
 
@@ -315,7 +321,7 @@ var summary = (function() {
 
 		})
 
-		return new V()
+		return new View()
 
 	}
 
@@ -327,9 +333,11 @@ var summary = (function() {
 				return;
 			};
 		}
+
 		_.each(model.get("groups"), function (group) {
 			updateSummaryGroup(group, switchTab)
 		})
+
 	}
 
 	return {
@@ -498,14 +506,14 @@ var init = function (data) {
 	summary.init(model)
 	weightedOverlay.init(model)
 
-	$("#parameters").append(weightedOverlay.view.el)
-	$("#summary").append(summary.view.el)
-
 	model.on("layerchange", function (layer) {
 		weightedOverlay.update()
 		summary.setLayerWeight(layer.name, layer.weight);
 		summary.update(false);
 	})
+
+	$("#parameters").append(weightedOverlay.view.el)
+	$("#summary").append(summary.view.el)
 
 	colorRamps.bindColorRamps();
 

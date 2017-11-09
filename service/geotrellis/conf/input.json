@@ -1,10 +1,10 @@
 [
   {
-    "name": "SA_BeachDune_Charleston",
+    "name": "SA_CenDens_Charleston",
     "format": "geotiff",
     "backend": {
       "type": "hadoop",
-      "path": "file:///data/arg_wm/SA_BeachDune_Charleston/"
+      "path": "file:///data/arg_wm/SA_CenDens_Charleston/"
     },
     "cache": "NONE"
   }
