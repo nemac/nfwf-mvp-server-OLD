@@ -132,8 +132,6 @@
 								<table class="summary-group table table-striped">
 									<tbody>
 										<tr class="warning">
-											<td class="bold">Score:</td>
-											<td id="exposure-score" class="bold" style="text-align:right;"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -190,6 +188,7 @@
 		%>
 	</script>
 
+
 	<script type="text/template" id="summary-group-template">
 		<%
 			_.each(data.groups, function (group) {
@@ -198,36 +197,60 @@
 				})
 				if (layers.length) {
 		%>
-				<h4 class="summary-group-heading"><%= group.title %></h4>
-				<table class="summary-group table table-striped">
-					<tbody>
+			<h4 class="summary-group-heading"><%= group.title %></h4>
+			<table class="summary-group table table-striped">
+				<tbody>
+				<%
+					_.each(layers, function (layer) {
+				%>
+					<tr class="param-summary-score">
+						<td><%= layer.display %></td>
+
 						<%
-							_.each(layers, function (layer) {
-						%>
-							<tr class="param-summary-score">
-								<td><%= layer.display %></td>
-								<td class="bold" style="text-align:right;"><%= layer.score %></td>
-							</tr>
-						<%
-							});
-						%>
-						<tr class="warning">
-							<td class="bold">Score:</td>
-							<td class="bold" style="text-align:right;"><%= group.total %></td>
-						</tr>
-						<%
-						 	if (group.quantiledScore) {
-						%>
-							<tr class="warning">
-								<td class="bold">Index Value:</td>
-								<td class="bold" style="text-align:right;"><%= group.quantiledScore %></td>
-							</tr>
-						<%
-						 	}
+							_.each(data.polygons, function (poly) {
+								var scoreGroup = poly.scores.filter(g => {
+									return g.id === group.id
+								})[0]
+								var _layer = scoreGroup.layers.filter(l => {
+									return l.layer === layer.name
+								})[0]
+								var classString = "bold score"
+								if (poly.layer.active) {
+									classString += " active"
+								}
 						%>
 
-					</tbody>
-				</table>
+							<td class="<%= classString %>" style="text-align:right;"><%= _layer.total %></td>
+						<%
+							})
+						%>
+
+					</tr>
+
+				<%
+					})
+				%>
+
+				<tr class="warning">
+					<td class="bold">Score:</td>
+						<%
+							_.each(data.polygons, function (poly) {
+								var scoreGroup = poly.scores.filter(g => {
+									return g.id === group.id
+								})[0]
+								var classString = "bold score"
+								if (poly.layer.active) {
+									classString += " active"
+								}
+						%>
+							<td class="<%= classString %>" style="text-align:right;"><%= scoreGroup.total %></td>
+						<%
+							})
+						%>
+				</tr>
+
+				</tbody>
+			</table>
 		<%
 				}
 			})

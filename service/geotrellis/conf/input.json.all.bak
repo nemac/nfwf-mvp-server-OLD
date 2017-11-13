@@ -1,5 +1,14 @@
 [
   {
+    "name": "SA_ResilienceHubs_Charleston",
+    "format": "geotiff",
+    "backend": {
+      "type": "hadoop",
+      "path": "file:///data/arg_wm/SA_ResilienceHubs_Charleston/"
+    },
+    "cache": "NONE"
+  },
+  {
     "name": "SA_CritFac_Charleston",
     "format": "geotiff",
     "backend": {

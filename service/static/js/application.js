@@ -1,5 +1,16 @@
 var server = ''
 
+var ajaxPromise = function (url, data, dataType) {
+  return new Promise((resolve, reject) => {
+   	$.ajax(url, {
+   		data: data,
+   		dataType: dataType,
+   		success: response => resolve(response),
+   		error: (jqXHR, status, err) => reject(err)
+   	})
+  });
+}
+
 
 var getLayer = function(url,attrib) {
 	return L.tileLayer(url, { maxZoom: 18, attribution: attrib });
@@ -49,6 +60,7 @@ var Model = function (config) {
 	m.set("numBreaks", config.numBreaks)
 	m.set("opacity", config.opacity)
 	m.set("ramp", config.ramp)
+	m.set("polygons", [])
 	return m
 }
 
@@ -102,25 +114,18 @@ var weightedOverlay = (function() {
 				var layerNames = getLayers();
 				if(layerNames == "") return;
 
-				var geoJson = "";
-				var polygon = summary.getPolygon();
-				if(polygon != null) {
-					geoJson = GJ.fromPolygon(polygon);
-				}
-
 				WOLayer = new L.tileLayer(server + 
 					'gt/tms/{z}/{x}/{y}?layers={layers}' +
-					 '&weights={weights}&breaks={breaks}&colorRamp={colorRamp}&mask={mask}', {
+					 '&weights={weights}&breaks={breaks}&colorRamp={colorRamp}', {
 					format: 'image/png',
 					breaks: breaks,
 					transparent: true,
 					layers: layerNames,
 					weights: getWeights(),
 					colorRamp: colorRamp,
-					mask: encodeURIComponent(geoJson),
 					attribution: 'NEMAC'
 				});
-								
+
 				WOLayer.setOpacity(opacity);
 				WOLayer.addTo(map);
 				map.lc.addOverlay(WOLayer, "Weighted Overlay");
@@ -231,67 +236,67 @@ var weightedOverlay = (function() {
 })();
 
 
-
 var summary = (function() {
 	var model
-	var polygon = null;
 	var weights = {};
 
-	var updateSummaryGroup = function (group, switchTab) {
+	var updateSummaryGroups = function (switchTab) {
 
-		var layers = model.get("layers").filter(layer => {
-			return layer.group === group.id && layer.weight !== 0
-		})
-
-		var layerIds = layers.map(layer => layer.name).join(",")
-		var weights = layers.map(layer => layer.weight).join(",")
-
-		var geoJson = GJ.fromPolygon(polygon);
-
-		// get summary score for active layers
-		$.ajax({        
-			url: server + 'gt/sum',
-			data: {
-				polygon : geoJson, 
-				layers  : layerIds, //weightedOverlay.activeLayers(), 
-				weights : weights //weightedOverlay.activeWeights()
-			},
-			dataType: "json",
-			success : function (data) {
-				updateSummaryGroupInterface(data, group.id, switchTab)
-			}
-		});
-	}
-
-	var updateSummaryGroupInterface = function(data, groupId, switchTab) {
-
-		var groups = model.get("groups")
-		_.each(groups, function (group) {
-			if (group.id === groupId) {
-				group.total = data.total
-			}
-		})
-
-		var layers = model.get("layers")
-		_.map(data.layerSummaries, function(ls) {
-			_.each(layers, layer => {
-				if (layer.name === ls.layer) {
-					layer.score = ls.total
-				}
+		var groups = _.map(model.get("groups"), g => {
+			g.layers = model.get("layers").filter(layer => {
+				return layer.group === g.id && layer.weight !== 0
 			})
+			g.layerIds = g.layers.map(layer => layer.name).join(",")
+			g.weights = g.layers.map(layer => layer.weight).join(",")
+			return g
 		})
 
-		model.set("layers", layers)
-		model.set("groups", groups)
-		model.trigger("change")
+		var proms = []
 
-		if (groups[0].total && groups[1].total) {
-			model.set("exposureScore", (Number(groups[0].total) * Number(groups[1].total)).toFixed(2))
-			var eScore = $("#exposure-score")
-			eScore.html(""+model.get("exposureScore"))
-		}
+		var polys = model.get("polygons")
 
-		if(switchTab) { $('a[href=#summary]').tab('show'); };
+		_.each(polys, poly => {
+
+			var geoJson = GJ.fromPolygon(poly.layer)
+
+			_.each(groups, g => {
+				var p = ajaxPromise('gt/sum', {
+					polygon: geoJson,
+					layers: g.layerIds,
+					weights: g.weights
+				})
+				proms.push(p)
+			})
+
+		})
+
+		Promise.all(proms).then(responses => {
+
+			var polygons = model.get("polygons")
+
+			var i = 0
+			while (i < responses.length) {
+				_.each(polygons, poly => {
+					poly.scores = []
+					_.each(groups, g => {
+						poly.scores.push({
+							id: g.id,
+							total: responses[i].total,
+							layers: responses[i].layerSummaries
+						})
+						i += 1
+					})					
+				})
+			}
+
+			model.set("polygons", polygons)
+			model.trigger("change")
+
+			if(switchTab) { $('a[href=#summary]').tab('show'); };
+
+		})
+
+
 	}
 
 	var initView = function (model) {
@@ -317,6 +322,22 @@ var summary = (function() {
 
 			render: function () {
 				this.$el.html(this.template(this.model.attributes))
+				var exposureScoreTableRow = $("#exposure-summary tr.warning")
+				exposureScoreTableRow.empty()
+				exposureScoreTableRow.append('<td class="bold">Score:</td>')
+
+				_.each(model.get("polygons"), poly => {
+					var exposureScore = _.reduce(poly.scores, (a, b) => (Number(a.total) * Number(b.total)).toFixed(2))
+					exposureScore = String(exposureScore)
+					classString = "bold score"
+					if (poly.layer.active) {
+						classString += " active"
+					}
+					exposureScoreTableRow.append(
+							`<td class="${classString}" style="text-align:right;">${exposureScore}</td>`
+					)
+				})
+
 				return this
 			}
 
@@ -328,17 +349,14 @@ var summary = (function() {
 
 	var update = function(switchTab) {
 		
-		if(polygon != null) {
+		if(model.get("polygons").length) {
 			if(weightedOverlay.activeLayers().length == 0) {
 				$(".summary-data").empty();
 				return;
 			};
 		}
 
-		_.each(model.get("groups"), function (group) {
-			updateSummaryGroup(group, switchTab)
-		})
-
+		updateSummaryGroups(switchTab)
 	}
 
 	return {
@@ -346,10 +364,30 @@ var summary = (function() {
 			model = m
 			this.view = initView(model)
 		},
+		updateSummaryGroups: updateSummaryGroups,
 		getPolygon: function() { return polygon; },
-		setPolygon: function(p) { 
-			polygon = p; 
-			weightedOverlay.update();
+		setPolygon: function(p) {
+			var polygons = model.get("polygons")
+			polygons.push({
+				layer: p,
+				scores: _.map(_.pluck(model.get("groups"), "id"), groupId => {
+					return {
+						id: groupId,
+						layers: _.map(
+							_.filter(model.get("layers"), layer => {
+								return layer.group === groupId
+							}),
+							layer => {
+								return {
+									id: layer.name
+								}
+							}
+						)
+					}
+				})
+			})
+			model.set("polygons", polygons)
+			//weightedOverlay.update();
 			update(true);
 		},
 		setLayers: function(ls) {
@@ -408,28 +446,41 @@ var drawing = (function() {
 
 	map.on('draw:created', function (e) {
 		if (e.layerType === 'polygon') {
+			drawnItems.addLayer(e.layer)
 			summary.setPolygon(e.layer);
+			e.layer.on("mouseover", function (e) {
+				e.layer.active = true
+				summary.updateSummaryGroups(true)
+			})
+			e.layer.on("mouseout", function (e) {
+				e.layer.active = false
+				summary.updateSummaryGroups(true)
+			})
 		}
-	});
+	})
 
 	map.on('draw:edited', function(e) {
+		/*
 		var polygon = summary.getPolygon();
 		if(polygon != null) { 
 			summary.update();
 			weightedOverlay.update();
 		}
+		*/
 	});
 
 	map.on('draw:drawstart', function(e) {
-		var polygon = summary.getPolygon();
-		if(polygon != null) {
-			drawnItems.removeLayer(polygon);
-		}
+
 	});
 
 	map.on('draw:drawstop', function(e) {
-		drawnItems.addLayer(summary.getPolygon());
+
 	});
+
+	map.on('draw', function (e) {
+		console.log('hi')
+		console.log(e)
+	})
 
 	return {
 		clear: function(polygon) {
@@ -437,6 +488,7 @@ var drawing = (function() {
 		}
 	}
 })();
+
 
 var colorRamps = (function() {
 	var makeColorRamp = function(colorDef) {
@@ -467,7 +519,6 @@ var colorRamps = (function() {
 	}
 })();
 
-// Set up from config
 
 var setupSize = function() {
 	var bottomPadding = 10;
@@ -491,6 +542,7 @@ var setupSize = function() {
 	$(window).resize(resize);
 };
 
+
 var getConfig = function (cb) {
 	$.ajax({
 		dataType: "json",
@@ -501,6 +553,7 @@ var getConfig = function (cb) {
 		}
 	})
 }
+
 
 var init = function (data) {
 

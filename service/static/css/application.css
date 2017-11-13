@@ -99,6 +99,10 @@ span.weight input {
 	font-weight: bold;
 }
 
+.summary-group .score.active {
+	background-color: #d1e1fc;
+}
+
 #summary {
 	margin-right: 15px;
 }

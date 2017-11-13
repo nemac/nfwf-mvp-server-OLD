@@ -1,6 +1,7 @@
 version: '2.1'
 services:
   gt-chatta:
+    shm_size: 10g
     image: openjdk:8-jre
     entrypoint:
       - ./sbt
