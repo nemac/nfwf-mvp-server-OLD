@@ -1,0 +1,11 @@
+FROM openjdk:8-jre
+
+COPY ./service/geotrellis /opt/geotrellis
+
+COPY ./service/static /static
+
+COPY ./service/geotrellis/data /data
+
+WORKDIR /opt/geotrellis
+
+ENTRYPOINT ./sbt runMain geotrellis.chatta.Main
